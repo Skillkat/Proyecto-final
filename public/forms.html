@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar/Editar Producto</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Formulario de Producto</h1>
+    </header>
+    <main>
+        <form id="product-form">
+            <input type="text" name="code" placeholder="Código" required>
+            <input type="text" name="name" placeholder="Nombre del Artículo" required>
+            <textarea name="description" placeholder="Descripción"></textarea>
+            <input type="number" name="quantity" placeholder="Cantidad" required>
+            <input type="number" name="price" placeholder="Precio" step="0.01" required>
+            <input type="file" name="photo">
+            <button type="submit">Guardar</button>
+        </form>
+    </main>
+    <script src="/js/form.js"></script>
+</body>
+</html>
