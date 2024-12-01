@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Productos</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Gestión de Productos de Computadora</h1>
+
+        <!-- Formulario de producto -->
+        <div id="productForm">
+            <input type="text" id="code" placeholder="Código del Producto" required>
+            <input type="text" id="name" placeholder="Nombre del Producto" required>
+            <input type="file" id="photo" placeholder="Foto del Producto" required>
+            <textarea id="description" placeholder="Descripción del Producto" required></textarea>
+            <input type="number" id="quantity" placeholder="Cantidad" required>
+            <input type="number" id="price" placeholder="Precio" required>
+            <button onclick="addProduct()">Agregar Producto</button>
+        </div>
+
+        <!-- Tabla de productos -->
+        <h2>Lista de Productos</h2>
+        <table id="productsTable">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Foto</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los productos se mostrarán aquí dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
