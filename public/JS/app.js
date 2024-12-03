@@ -1,18 +1,18 @@
 // API base URL
-const apiUrl = 'http://localhost:5000/api/products'; // Cambia esta URL si es necesario
+const apiUrl = 'http://localhost:5000/api/product'; // Cambia esta URL si es necesario
 
 // Función para obtener los productos
-async function getProducts() {
+async function getproduct() {
     const response = await fetch(apiUrl);
     const data = await response.json();
     
     // Limpiar la tabla antes de cargar nuevos datos
-    const productsTable = document.getElementById('productsTable').getElementsByTagName('tbody')[0];
-    productsTable.innerHTML = '';
+    const productTable = document.getElementById('productTable').getElementsByTagName('tbody')[0];
+    productTable.innerHTML = '';
 
     // Agregar cada producto a la tabla
     data.forEach(product => {
-        const row = productsTable.insertRow();
+        const row = productTable.insertRow();
         
         row.innerHTML = `
             <td>${product.code}</td>
@@ -22,8 +22,8 @@ async function getProducts() {
             <td>${product.quantity}</td>
             <td>${product.price}</td>
             <td>
-                <button onclick="editProduct('${product._id}')">Editar</button>
-                <button onclick="deleteProduct('${product._id}')">Eliminar</button>
+                <button onclick="editProduct('${product.id}')">Editar</button>
+                <button onclick="deleteProduct('${product.id}')">Eliminar</button>
             </td>
         `;
     });
@@ -55,7 +55,7 @@ async function addProduct() {
 
     if (response.ok) {
         alert('Producto agregado exitosamente!');
-        getProducts(); // Actualizar la lista de productos
+        getproduct(); // Actualizar la lista de productos
     } else {
         alert('Error al agregar el producto.');
     }
@@ -83,7 +83,7 @@ async function editProduct(id) {
 async function updateProduct(id) {
     const code = document.getElementById('code').value;
     const name = document.getElementById('name').value;
-    const photo = document.getElementById('photo').files[0];
+    const photo = document.getElementById('photo').files[0]; // Nueva imagen
     const description = document.getElementById('description').value;
     const quantity = document.getElementById('quantity').value;
     const price = document.getElementById('price').value;
@@ -92,25 +92,30 @@ async function updateProduct(id) {
     const formData = new FormData();
     formData.append('code', code);
     formData.append('name', name);
-    if (photo) formData.append('photo', photo);
     formData.append('description', description);
     formData.append('quantity', quantity);
     formData.append('price', price);
 
-    // Enviar la solicitud PUT a la API
+    // Solo agrega la imagen si se seleccionó una nueva
+    if (photo) {
+        formData.append('photo', photo);
+    }
+
+    // Enviar la solicitud PUT al backend
     const response = await fetch(`${apiUrl}/${id}`, {
         method: 'PUT',
-        body: formData
+        body: formData,
     });
 
     if (response.ok) {
         alert('Producto actualizado exitosamente!');
-        getProducts(); // Actualizar la lista de productos
+        getproduct(); // Actualizar la lista de productos
         resetForm(); // Limpiar el formulario
     } else {
         alert('Error al actualizar el producto.');
     }
 }
+
 
 // Función para eliminar un producto
 async function deleteProduct(id) {
@@ -120,7 +125,7 @@ async function deleteProduct(id) {
 
     if (response.ok) {
         alert('Producto eliminado exitosamente!');
-        getProducts(); // Actualizar la lista de productos
+        getproduct(); // Actualizar la lista de productos
     } else {
         alert('Error al eliminar el producto.');
     }
@@ -135,4 +140,4 @@ function resetForm() {
 }
 
 // Cargar productos al inicio
-getProducts();
+getproduct();

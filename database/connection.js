@@ -1,14 +1,15 @@
 const sql = require('mssql');
 
-// Configuración de la conexión
+// Configuración para autenticación de SQL Server
 const config = {
-    user: 'tu_usuario', // Reemplaza con tu usuario
-    password: 'tu_contraseña', // Reemplaza con tu contraseña
-    server: 'localhost', // O la IP de tu servidor
-    database: 'ComputerPartsDB',
+    server: 'localhost',
+    port: 1433, // Cambia si usas un puerto diferente
+    database: 'UserRegister',
+    user: 'sa', // Usuario de SQL Server
+    password: 'sa1234', // Contraseña del usuario
     options: {
-        encrypt: false, // Deshabilitar en entornos locales
-        trustServerCertificate: true, // Solo si usas localhost
+        encrypt: false, // Cambiar a true si necesitas cifrar
+        trustServerCertificate: true, // Solo en desarrollo
     },
 };
 
