@@ -29,8 +29,54 @@ async function getproduct() {
     });
 }
 
-// Función para agregar un producto
+//Funcion de validacion de errores:
+function validateForm() {
+    const fields = [
+        { id: 'code', message: 'El código del producto es obligatorio.' },
+        { id: 'name', message: 'El nombre del producto es obligatorio.' },
+        { id: 'photo', message: 'La foto del producto es obligatoria.' },
+        { id: 'description', message: 'La descripción del producto es obligatoria.' },
+        { id: 'quantity', message: 'La cantidad del producto es obligatoria.' },
+        { id: 'price', message: 'El precio del producto es obligatorio.' }
+    ];
+
+    let isValid = true;
+
+    fields.forEach(field => {
+        const inputElement = document.getElementById(field.id);
+        const errorMessage = inputElement.nextElementSibling;
+
+        if (inputElement.type === 'file') {
+            if (!inputElement.files[0]) {
+                isValid = false;
+                inputElement.classList.add('error');
+                errorMessage.textContent = field.message;
+                errorMessage.style.display = 'block';
+            } else {
+                inputElement.classList.remove('error');
+                errorMessage.style.display = 'none';
+            }
+        } else if (inputElement.value.trim() === '') {
+            isValid = false;
+            inputElement.classList.add('error');
+            errorMessage.textContent = field.message;
+            errorMessage.style.display = 'block';
+        } else {
+            inputElement.classList.remove('error');
+            errorMessage.style.display = 'none';
+        }
+    });
+
+    return isValid;
+}
+
+// Modificar la función de agregar producto para incluir la validación
 async function addProduct() {
+    if (!validateForm()) {
+        alert('Por favor, corrige los campos en rojo antes de continuar.');
+        return;
+    }
+
     const code = document.getElementById('code').value;
     const name = document.getElementById('name').value;
     const photo = document.getElementById('photo').files[0];
@@ -38,7 +84,6 @@ async function addProduct() {
     const quantity = document.getElementById('quantity').value;
     const price = document.getElementById('price').value;
 
-    // Crear un FormData para enviar datos, incluyendo el archivo de la foto
     const formData = new FormData();
     formData.append('code', code);
     formData.append('name', name);
@@ -47,7 +92,6 @@ async function addProduct() {
     formData.append('quantity', quantity);
     formData.append('price', price);
 
-    // Enviar la solicitud POST a la API
     const response = await fetch(apiUrl, {
         method: 'POST',
         body: formData
@@ -55,11 +99,55 @@ async function addProduct() {
 
     if (response.ok) {
         alert('Producto agregado exitosamente!');
-        getproduct(); // Actualizar la lista de productos
+        getproduct();
+        resetForm();
     } else {
         alert('Error al agregar el producto.');
     }
 }
+
+
+// Función para agregar un producto
+async function addProduct() {
+    // Verifica si el formulario es válido antes de continuar
+    if (!validateForm()) {
+        return; // No procede si hay errores
+    }
+
+    const code = document.getElementById('code').value;
+    const name = document.getElementById('name').value;
+    const photo = document.getElementById('photo').files[0];
+    const description = document.getElementById('description').value;
+    const quantity = document.getElementById('quantity').value;
+    const price = document.getElementById('price').value;
+
+    const formData = new FormData();
+    formData.append('code', code);
+    formData.append('name', name);
+    formData.append('photo', photo);
+    formData.append('description', description);
+    formData.append('quantity', quantity);
+    formData.append('price', price);
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            alert('Producto agregado exitosamente!');
+            getproduct();
+            resetForm();
+        } else {
+            alert('Error al agregar el producto. Revisa los datos e inténtalo de nuevo.');
+        }
+    } catch (error) {
+        console.error('Error en la solicitud:', error);
+        alert('Hubo un problema al conectar con el servidor.');
+    }
+}
+
 
 // Función para editar un producto
 async function editProduct(id) {

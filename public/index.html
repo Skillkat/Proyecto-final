@@ -16,26 +16,32 @@
             <div class="form-group">
                 <label for="code">Código del Producto:</label>
                 <input type="text" id="code" placeholder="Código del Producto" required>
+                <small class="error-message"></small>
             </div>
             <div class="form-group">
                 <label for="name">Nombre del Producto:</label>
                 <input type="text" id="name" placeholder="Nombre del Producto" required>
+                <small class="error-message"></small>
             </div>
             <div class="form-group">
                 <label for="photo">Foto del Producto:</label>
                 <input type="file" id="photo" placeholder="Foto del Producto" required>
+                <small class="error-message"></small>
             </div>
             <div class="form-group">
                 <label for="description">Descripción del Producto:</label>
                 <textarea id="description" placeholder="Descripción del Producto" required></textarea>
+                <small class="error-message"></small>
             </div>
             <div class="form-group">
                 <label for="quantity">Cantidad:</label>
                 <input type="number" id="quantity" placeholder="Cantidad disponible" required>
+                <small class="error-message"></small>
             </div>
             <div class="form-group">
                 <label for="price">Precio:</label>
                 <input type="number" id="price" placeholder="Precio del Producto" required>
+                <small class="error-message"></small>
             </div>
             <button onclick="addProduct()">Agregar Producto</button>
         </div>

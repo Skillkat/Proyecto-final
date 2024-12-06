@@ -9,14 +9,14 @@
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f0f8ff;
-    color: #333;
+    color: #c46161;
     line-height: 1.6;
     font-size: 16px;
 }
 
 /* Contenedor principal */
 .container {
-    max-width: 1200px;
+    max-width: 900px;
     margin: 50px auto;
     background-color: #ffffff;
     padding: 40px;
@@ -68,7 +68,7 @@ h2 {
 .form-group textarea,
 .form-group button {
     width: 100%;
-    padding: 14px;
+    padding: 10px;
     margin-top: 8px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -94,7 +94,7 @@ button {
     color: white;
     border: none;
     cursor: pointer;
-    padding: 10px 20px;
+    padding: 8px 20px;
     border-radius: 8px;
     transition: background-color 0.3s;
 }
@@ -111,7 +111,7 @@ table {
 }
 
 table, th, td {
-    border: 1px solid #ddd;
+    border: 1px solid #3b423f;
 }
 
 th, td {
@@ -120,7 +120,7 @@ th, td {
 }
 
 th {
-    background-color: #009688;
+    background-color: #3b3f3f;
     color: white;
     font-weight: 600;
 }
@@ -173,4 +173,15 @@ table img {
         max-width: 60px;
         max-height: 50px;
     }
+    input.error, textarea.error {
+        border: 2px solid red;
+        background-color: #ffe5e5;
+    }
+    
+    small.error-message {
+        color: red;
+        font-size: 12px;
+        display: none; /* Por defecto no visible */
+    }
+    
 }
